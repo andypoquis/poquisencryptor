@@ -1,0 +1,28 @@
+{
+    "name": "poquisencryptor",
+    "dockerfileLines": [
+      "RUN pip install --upgrade pip",
+      "COPY . /app",
+      "WORKDIR /app",
+      "RUN pip install -r requirements.txt",
+      "EXPOSE 5000",
+      "CMD [\"python\", \"app.py\"]"
+    ],
+    "buildContext": ".",
+    "dockerRegistry": "",
+    "instances": 1,
+    "network": "bridge",
+    "ports": [
+      {
+        "containerPort": 5000,
+        "protocol": "tcp",
+        "requestUrl": "/",
+        "localPort": 0
+      }
+    ],
+    "labels": {
+      "io.caprover.app-logs-path": "/logs",
+      "io.caprover.app": "true"
+    }
+  }
+  
