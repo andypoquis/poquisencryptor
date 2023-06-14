@@ -1,5 +1,5 @@
 {
-    "name": "poquisencryptor",
+    "name": "nombre_de_tu_aplicacion",
     "dockerfileLines": [
       "RUN pip install --upgrade pip",
       "COPY . /app",
