@@ -1,10 +1,7 @@
 from flask import Flask, redirect, render_template, request
 
-# Importar las funciones y algoritmo de cifrado/descifrado
 import random
 n = 0
-
-
 
 def gcd(a, b):
     while b != 0:
@@ -17,6 +14,7 @@ def extended_gcd(a, b):
     else:
         gcd, x, y = extended_gcd(b % a, a)
         return gcd, y - (b // a) * x, x
+    #inverso multiplicatico
 
 def is_prime(num):
     if num < 2:
@@ -77,10 +75,8 @@ def index():
     return redirect('/encrypt')
 
 
-# Definir la ruta para encriptar
 @app.route('/encrypt', methods=['GET', 'POST'])
 def encrypt_message():
-    global n   # Cambio de nombre de la función
     if request.method == 'POST':
         message = request.form['message']
 
@@ -103,7 +99,10 @@ def decrypt_message():
     print("Esto es n: ", str(n))
     if request.method == 'POST':
         ciphertext = request.form['ciphertext']
-        private_key = (int(request.form['private_key']), n)  # Solo necesitamos el valor de d en la llave privada
+        n_key = int(request.form['n'])
+
+        print("Esto es n: ", str(n_key))
+        private_key = (int(request.form['private_key']), n_key) 
 
         try:
             # Descifrar mensaje
@@ -114,8 +113,6 @@ def decrypt_message():
         return render_template('decrypt.html', decrypted_message=decrypted_message)
 
     return render_template('decrypt.html')
-
-# Resto del código omitido por brevedad
 
 if __name__ == '__main__':
     app.run(debug=True)
